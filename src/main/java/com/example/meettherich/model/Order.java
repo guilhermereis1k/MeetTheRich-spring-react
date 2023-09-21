@@ -1,5 +1,6 @@
 package com.example.meettherich.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,17 +20,21 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    private User user;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private User users;
 
-    @OneToOne
-    private Rich rich;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "riches_id")
+    private Rich riches;
 
     private LocalDate instant;
 
     public Order(User user, Rich rich, LocalDate instant) {
-        this.user = user;
-        this.rich = rich;
+        this.users = user;
+        this.riches = rich;
         this.instant = instant;
     }
 

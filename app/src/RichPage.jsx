@@ -135,7 +135,7 @@ function RichPage() {
           <AboutText>{richData.aboutText}</AboutText>
           <FortuneTitle>Fortune:</FortuneTitle>
           <Fortune>{USDollar.format(richData.fortune)}</Fortune>
-          <Link to="/register" state={{ richId: richData.id }}>
+          <Link to="/order/create" state={{ richId: richData.id }}>
             <MeetButton>Click here to meet him</MeetButton>
           </Link>
         </div>

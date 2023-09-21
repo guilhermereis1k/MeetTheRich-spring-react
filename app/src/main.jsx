@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <RichPage />,
   },
   {
-    path: "/register",
+    path: "/order/create",
     element: <Register />,
   },
 ]);

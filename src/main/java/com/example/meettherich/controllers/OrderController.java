@@ -12,12 +12,11 @@ public class OrderController {
     @Autowired
     private OrderService service;
 
+
     @CrossOrigin(origins = "http://localhost:5173")
-    @PostMapping("/create")
-    public String createOrder(@RequestParam Long richId, @ModelAttribute("user") User user) {
-        // Lógica para criar a Order associando o Rich e o User
+    @PostMapping(value= "/{richId}")
+    public void createOrder(@PathVariable(name="richId") Long richId, @RequestBody User user) {
         service.createOrder(richId, user);
-        return "redirect:/success"; // Redirecione para uma página de sucesso
     }
 
 }

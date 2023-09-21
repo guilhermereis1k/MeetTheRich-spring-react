@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +23,9 @@ public class Rich implements Serializable {
 
     private Integer id;
     private String name;
+
+    @OneToMany(mappedBy = "riches")
+    private List<Order> orders = new ArrayList<>();
 
     @Column(columnDefinition = "TEXT")
     private String aboutText;

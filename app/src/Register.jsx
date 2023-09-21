@@ -1,7 +1,7 @@
-import { styled } from "styled-components";
-import Header from "./components/Header";
-import { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { styled } from "styled-components"
+import Header from "./components/Header"
+import { useRef, useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const FormContainer = styled.div`
   margin: 10rem auto;
@@ -19,7 +19,7 @@ const FormContainer = styled.div`
     text-align: center;
     margin-top: 1rem;
   }
-`;
+`
 
 const InputBox = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const InputBox = styled.div`
     background-color: #ececec;
     padding-left: 1.4rem;
   }
-`;
+`
 
 const Button = styled.button`
   display: block;
@@ -61,49 +61,51 @@ const Button = styled.button`
     color: #01003b;
     border: 2px solid #01003b;
   }
-`;
+`
 
 function Register() {
-  const [responseBody, setResponseBody] = useState({
-    rich: richId,
+  let { state } = useLocation()
+
+  const [user, setUser] = useState({
     email: "",
     name: "",
-  });
+  })
 
   const onSubmitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     async function postJSON(data) {
       try {
-        const response = await fetch("http://localhost:8080/users", {
-          method: "post", // or 'PUT'
-          RequestCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            "Cache-Control": "no-cache",
-          },
-          body: JSON.stringify(responseBody),
-        });
-        const result = await response.json();
-        return result;
+        const response = await fetch(
+          `http://localhost:8080/order/${state.richId}`,
+          {
+            method: "POST", // or 'PUT'
+            RequestCredentials: "includes",
+            headers: {
+              "Content-Type": "application/json",
+              "Cache-Control": "no-cache",
+            },
+            body: JSON.stringify(user),
+          }
+        )
+        const result = await response.json()
+        return result
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error:", error)
+      } finally {
+        console.log("Success!")
       }
     }
 
-    postJSON();
-  };
+    postJSON()
+  }
 
   const handleInput = (event) => {
-    setResponseBody({
-      ...responseBody,
+    setUser({
+      ...user,
       [event.target.name]: event.target.value,
-    });
-  };
-
-  let { state } = useLocation();
-
-  console.log(state.richId);
+    })
+  }
 
   return (
     <>
@@ -143,7 +145,7 @@ function Register() {
         </FormContainer>
       </form>
     </>
-  );
+  )
 }
 
-export default Register;
+export default Register
