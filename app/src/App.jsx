@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 import Header from "./components/Header";
 import elonMuskMainImage from "./assets/Elon-Musk-PNG-Free-Image.png";
+import { Link } from "react-router-dom";
+import Riches from "./Riches";
 
 const Content = styled.main`
   display: flex;
@@ -70,9 +72,9 @@ function App() {
             doloremque magnam tempore optio assumenda repellat eaque aspernatur
             laudantium. Voluptates, non nemo!
           </Text>
-          <Button>
-            <a href="/riches">Click here!</a>
-          </Button>
+          <Link to="/riches">
+            <Button>Click here!</Button>
+          </Link>
         </TextContainer>
         <Image src={elonMuskMainImage} alt="" />
       </Content>

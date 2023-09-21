@@ -5,12 +5,10 @@ import com.example.meettherich.services.RichService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/riches")
@@ -19,11 +17,18 @@ public class RichesController {
     @Autowired
     private RichService service;
 
-    @CrossOrigin(origins = "http://localhost:5174")
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public ResponseEntity<List<Rich>> findAllByOrderById() {
         List<Rich> list = service.findAllByOrderById();
         return ResponseEntity.ok().body(list);
+    }
+
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Rich> findById(@PathVariable Long id) {
+        Rich obj = service.findById(id);
+       return ResponseEntity.ok().body(obj);
     }
 
 }

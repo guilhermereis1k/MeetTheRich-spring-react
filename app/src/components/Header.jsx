@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import App from "../App";
 
 const HeaderContainer = styled.header`
   margin-top: 2rem;
@@ -17,7 +19,9 @@ const HeaderTitle = styled.h1`
 function Header() {
   return (
     <HeaderContainer>
-      <HeaderTitle>Meet The Rich</HeaderTitle>
+      <Link to={"/"}>
+        <HeaderTitle>Meet The Rich</HeaderTitle>
+      </Link>
     </HeaderContainer>
   );
 }
