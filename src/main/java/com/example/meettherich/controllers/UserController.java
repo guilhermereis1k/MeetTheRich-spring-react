@@ -1,15 +1,14 @@
 package com.example.meettherich.controllers;
 
-import com.example.meettherich.model.Rich;
+import com.example.meettherich.config.MyPasswordEncoder;
 import com.example.meettherich.model.User;
-import com.example.meettherich.services.RichService;
+import com.example.meettherich.repository.UserRepository;
 import com.example.meettherich.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -18,6 +17,17 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private final PasswordEncoder encoder;
+
+    @Autowired
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository, PasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.encoder = encoder;
+    }
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
@@ -36,9 +46,20 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping
     public ResponseEntity<User> insert(@RequestBody User obj) {
+        MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
+        obj.setPassword(passwordEncoder.encode(obj.getPassword()));
         obj = service.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.ok().body(obj);
+    }
+
+    @CrossOrigin(origins = "http://localhost:5173")
+    @PostMapping("/validation")
+    public ResponseEntity<Boolean> validatePassword(@RequestParam String login, @RequestParam String password) {
+    boolean valid = false;
+
+    User user = userRepository.findByLogin(login);
+
+    if(user.isEmpty())
     }
 
 }

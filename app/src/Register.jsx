@@ -69,6 +69,7 @@ function Register() {
   const [user, setUser] = useState({
     email: "",
     name: "",
+    password: "",
   })
 
   const onSubmitHandler = (e) => {
@@ -134,6 +135,19 @@ function Register() {
               placeholder="Enter your name"
               name="name"
               id="name"
+              onChange={handleInput}
+              required
+            />
+          </InputBox>
+
+          <InputBox>
+            <label htmlFor="password">Password</label>
+            <input
+              type="text"
+              placeholder="Enter your password"
+              name="password"
+              password="password"
+              id="password"
               onChange={handleInput}
               required
             />

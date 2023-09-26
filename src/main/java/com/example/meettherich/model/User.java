@@ -9,10 +9,10 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @ToString
 @EqualsAndHashCode
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -28,7 +28,17 @@ public class User implements Serializable {
 
     private String email;
 
+    private String password;
+
     public Integer getId() {
         return id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
