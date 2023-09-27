@@ -1,12 +1,12 @@
-import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { styled } from "styled-components";
-import Header from "./components/Header";
+import { Link, useParams } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { styled } from "styled-components"
+import Header from "./components/Header"
 
 function RichPage() {
-  const { id } = useParams();
+  const { id } = useParams()
 
-  const [richData, setRichData] = useState([]);
+  const [richData, setRichData] = useState([])
 
   useEffect(() => {
     async function getJSON(data) {
@@ -19,17 +19,17 @@ function RichPage() {
             "Cache-Control": "no-cache",
           },
           body: JSON.stringify(data),
-        });
-        const result = await response.json();
-        setRichData(result);
-        return richData;
+        })
+        const result = await response.json()
+        setRichData(result)
+        return richData
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error:", error)
       }
     }
 
-    getJSON();
-  }, []);
+    getJSON()
+  }, [])
 
   const RichImage = styled.img`
     display: block;
@@ -37,7 +37,7 @@ function RichPage() {
     width: 35rem;
     object-fit: cover;
     margin-bottom: 2rem;
-  `;
+  `
 
   const RichContainer = styled.div`
     display: flex;
@@ -45,7 +45,7 @@ function RichPage() {
     justify-content: center;
     align-items: start;
     margin: 10rem 5rem;
-  `;
+  `
 
   const RichInfo = styled.div`
     display: flex;
@@ -58,12 +58,12 @@ function RichPage() {
     font-family: "Roboto";
     line-height: 3rem;
     font-size: 1.5rem;
-  `;
+  `
 
   const AboutText = styled.p`
     font-family: "Roboto";
     font-size: 1.8rem;
-  `;
+  `
 
   const Name = styled.h1`
     text-transform: uppercase;
@@ -71,30 +71,30 @@ function RichPage() {
     font-size: 4rem;
     letter-spacing: 1rem;
     margin-bottom: 2rem;
-  `;
+  `
 
   const Fortune = styled.h2`
     font-family: "Oswald";
     font-size: 4rem;
-  `;
+  `
 
   const FortuneTitle = styled.h3`
     margin-top: 5rem;
     font-family: "Oswald";
     font-size: 3rem;
-  `;
+  `
 
   const RichInfoTitle = styled.h2`
     margin-bottom: 1rem;
     font-family: "Oswald";
     font-size: 3rem;
-  `;
+  `
 
   const RichInfos = styled.h3`
     font-family: "Oswald";
     font-size: 2rem;
     font-weight: 300;
-  `;
+  `
 
   const MeetButton = styled.button`
     margin-top: 5rem;
@@ -112,12 +112,12 @@ function RichPage() {
       color: #01003b;
       border: 2px solid #01003b;
     }
-  `;
+  `
 
   let USDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  });
+  })
 
   return (
     <>
@@ -135,13 +135,13 @@ function RichPage() {
           <AboutText>{richData.aboutText}</AboutText>
           <FortuneTitle>Fortune:</FortuneTitle>
           <Fortune>{USDollar.format(richData.fortune)}</Fortune>
-          <Link to="/order/create" state={{ richId: richData.id }}>
+          <Link to="/users/register" state={{ richId: richData.id }}>
             <MeetButton>Click here to meet him</MeetButton>
           </Link>
         </div>
       </RichContainer>
     </>
-  );
+  )
 }
 
-export default RichPage;
+export default RichPage

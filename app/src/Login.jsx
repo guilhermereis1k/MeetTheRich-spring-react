@@ -1,7 +1,7 @@
-import { styled } from "styled-components";
-import Header from "./components/Header";
-import { useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { styled } from "styled-components"
+import Header from "./components/Header"
+import { useRef, useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const FormContainer = styled.div`
   margin: 10rem auto;
@@ -19,7 +19,7 @@ const FormContainer = styled.div`
     text-align: center;
     margin-top: 1rem;
   }
-`;
+`
 
 const InputBox = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const InputBox = styled.div`
     background-color: #ececec;
     padding-left: 1.4rem;
   }
-`;
+`
 
 const Button = styled.button`
   display: block;
@@ -61,24 +61,21 @@ const Button = styled.button`
     color: #01003b;
     border: 2px solid #01003b;
   }
-`;
+`
 
-function Register() {
-  const navigate = useNavigate();
-
+function Login() {
   const [user, setUser] = useState({
-    email: "",
     login: "",
     password: "",
-  });
+  })
 
   const onSubmitHandler = (e) => {
-    e.preventDefault();
+    console.log(JSON.stringify(user))
+    e.preventDefault()
 
-    console.log(JSON.stringify(user));
     async function postJSON(data) {
       try {
-        const response = await fetch(`http://localhost:8080/users/create`, {
+        const response = await fetch(`http://localhost:8080/users/validation`, {
           method: "POST", // or 'PUT'
           RequestCredentials: "includes",
           headers: {
@@ -86,46 +83,32 @@ function Register() {
             "Cache-Control": "no-cache",
           },
           body: JSON.stringify(user),
-        });
-
-        const result = await response.json();
-        return result;
+        })
+        const result = await response.json()
+        return result
+        console.log(result)
       } catch (error) {
-        throw new Error(error);
+        throw new Error(error)
       }
     }
 
-    postJSON();
-
-    navigate("/users/login");
-  };
+    postJSON()
+  }
 
   const handleInput = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
-    });
-  };
+    })
+  }
 
   return (
     <>
       <Header />
       <form onSubmit={onSubmitHandler}>
         <FormContainer>
-          <h1>Register now</h1>
+          <h1>Login now</h1>
           <p>Please fill in this form to make your meeting order.</p>
-
-          <InputBox>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              placeholder="Enter Email"
-              name="email"
-              id="email"
-              onChange={handleInput}
-              required
-            />
-          </InputBox>
 
           <InputBox>
             <label htmlFor="login">Login</label>
@@ -151,19 +134,14 @@ function Register() {
               required
             />
           </InputBox>
-          <InputBox>
-            <Link to="/users/login">
-              <p>I have an account</p>
-            </Link>
-          </InputBox>
 
           <InputBox>
-            <Button type="submit">Register</Button>
+            <Button type="submit">Login</Button>
           </InputBox>
         </FormContainer>
       </form>
     </>
-  );
+  )
 }
 
-export default Register;
+export default Login

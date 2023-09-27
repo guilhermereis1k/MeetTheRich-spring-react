@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Getter
@@ -17,6 +15,7 @@ import java.util.List;
 @Table(name = "users")
 public class User implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,11 +23,22 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "users")
     private List<Order> orders = new ArrayList<>();
 
-    private String name;
+    @Column(name = "login", length = 30, nullable = false, unique = true)
+    private String login;
 
     private String email;
 
     private String password;
+
+    public User() {
+    }
+
+    public User(List<Order> orders, String login, String email, String password) {
+        this.orders = orders;
+        this.login = login;
+        this.email = email;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
@@ -40,5 +50,13 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
