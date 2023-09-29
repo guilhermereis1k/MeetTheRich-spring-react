@@ -1,5 +1,6 @@
 package com.example.meettherich.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Rich implements Serializable {
     private Integer id;
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "riches")
     private List<Order> orders = new ArrayList<>();
 

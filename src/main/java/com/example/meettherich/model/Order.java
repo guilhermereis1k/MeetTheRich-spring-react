@@ -20,12 +20,11 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "users_id")
     private User users;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "riches_id")
     private Rich riches;

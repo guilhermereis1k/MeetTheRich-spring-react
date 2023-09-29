@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -28,6 +30,12 @@ public class OrderService {
 
     @Autowired
     private UserService userService;
+
+    public List<Order> findAll(){
+        List<Order> allOrders = new ArrayList<>();
+        repository.findAll().forEach(allOrders::add);
+        return allOrders;
+    };
 
     public Order createOrder(Long richId, User user) {
             Optional<Rich> richOptional = richRepository.findById(richId);
