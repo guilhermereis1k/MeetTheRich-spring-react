@@ -1,6 +1,5 @@
 package com.example.meettherich.services;
 
-import com.example.meettherich.config.MyPasswordEncoder;
 import com.example.meettherich.model.Order;
 import com.example.meettherich.model.Rich;
 import com.example.meettherich.model.User;
@@ -37,16 +36,4 @@ public class OrderService {
         return allOrders;
     };
 
-    public Order createOrder(Long richId, User user) {
-            Optional<Rich> richOptional = richRepository.findById(richId);
-            Rich rich = richOptional.get();
-
-            MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user = userService.insert(user);
-
-            LocalDate instant = LocalDate.now();
-            Order order = new Order(user, rich, instant);
-            return repository.save(order);
-    }
 }

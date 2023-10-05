@@ -22,18 +22,18 @@ public class Order implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "users_id")
-    private User users;
+    @JoinColumn(name = "userId")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "riches_id")
-    private Rich riches;
+    @JoinColumn(name = "richId")
+    private Rich rich;
 
     private LocalDate instant;
 
     public Order(User user, Rich rich, LocalDate instant) {
-        this.users = user;
-        this.riches = rich;
+        this.user = user;
+        this.rich = rich;
         this.instant = instant;
     }
 

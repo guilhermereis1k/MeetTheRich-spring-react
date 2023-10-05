@@ -1,17 +1,15 @@
 package com.example.meettherich.controllers;
-
-import com.example.meettherich.config.MyPasswordEncoder;
 import com.example.meettherich.model.User;
 import com.example.meettherich.repository.UserRepository;
 import com.example.meettherich.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -21,15 +19,13 @@ public class UserController {
     private UserService service;
 
     @Autowired
-    private final PasswordEncoder encoder;
-
-    @Autowired
     private final UserRepository userRepository;
 
-    public UserController(UserRepository userRepository, PasswordEncoder encoder) {
+    public UserController(UserService service, UserRepository userRepository) {
+        this.service = service;
         this.userRepository = userRepository;
-        this.encoder = encoder;
     }
+
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
@@ -45,33 +41,4 @@ public class UserController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
-    @PostMapping(value = "/create")
-    public ResponseEntity<User> insert(@RequestBody User obj) {
-        MyPasswordEncoder passwordEncoder = new MyPasswordEncoder();
-        obj.setPassword(passwordEncoder.encode(obj.getPassword()));
-        obj = service.insert(obj);
-        return ResponseEntity.ok().body(obj);
-    }
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @PostMapping("/validation")
-    public ResponseEntity<Boolean> createUser(@RequestBody User user) {
-        // Aqui você pode acessar os campos 'login' e 'password' do objeto User
-        String login = user.getLogin();
-        String password = user.getPassword();
-        Optional<User> optUser = userRepository.findByLogin(login);
-
-        boolean valid = false;
-
-        if (optUser.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(valid);
-        }
-
-
-        valid = encoder.matches(password, optUser.get().getPassword());
-
-        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
-        return ResponseEntity.status(status).body(valid);
-    }
 }

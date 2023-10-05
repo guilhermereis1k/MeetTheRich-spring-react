@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@ToString
 @EqualsAndHashCode
+@Data
+@AllArgsConstructor
 @Getter
-@Setter
 @Entity
 @Table(name = "users")
 public class User implements Serializable, UserDetails {
@@ -26,7 +26,7 @@ public class User implements Serializable, UserDetails {
     private Integer id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
     @Column(name = "login", length = 30, nullable = false, unique = true)
@@ -46,6 +46,16 @@ public class User implements Serializable, UserDetails {
         this.login = login;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String login, String email,  String password, UserRole role) {
+        this.login = login;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(User user) {
     }
 
     public Integer getId() {
@@ -71,22 +81,22 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setPassword(String password) {

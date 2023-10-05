@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "riches")
+@Table(name = "rich")
 public class Rich implements Serializable {
 
     @Id
@@ -26,7 +26,7 @@ public class Rich implements Serializable {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "riches")
+    @OneToMany(mappedBy = "rich")
     private List<Order> orders = new ArrayList<>();
 
     @Column(columnDefinition = "TEXT")

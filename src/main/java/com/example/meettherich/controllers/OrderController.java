@@ -16,13 +16,6 @@ public class OrderController {
     @Autowired
     private OrderService service;
 
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @PostMapping(value= "/{richId}")
-    public void createOrder(@PathVariable(name="richId") Long richId, @RequestBody User user) {
-        service.createOrder(richId, user);
-    }
-
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public List<Order> findAll() {

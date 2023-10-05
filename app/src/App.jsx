@@ -22,14 +22,20 @@ const Image = styled.img`
 
 const Text = styled.p`
   font-family: "Roboto";
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: auto;
   width: 70%;
+  margin-bottom: 5rem;
 `;
 
-const TextTitle = styled.p`
+const TextTitle = styled.h1`
   font-family: "Roboto";
-  font-size: 5rem;
-  margin-bottom: 4rem;
+  font-size: 12rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 12rem;
+  margin-bottom: 2rem;
 `;
 
 const TextContainer = styled.div`
@@ -39,10 +45,9 @@ const TextContainer = styled.div`
 `;
 
 const Button = styled.button`
-  margin-top: 5rem;
   display: block;
-  width: 30rem;
-  height: 4rem;
+  width: 68%;
+  height: 6rem;
   text-transform: uppercase;
   background: #01003b;
   color: #ffffff;
@@ -53,9 +58,8 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: #ffffff;
-    color: #01003b;
-    border: 2px solid #01003b;
+    background: #010029;
+    color: #ffffff;
   }
 `;
 
@@ -65,12 +69,14 @@ function App() {
       <Header />
       <Content>
         <TextContainer>
-          <TextTitle>You can meet Elon Musk in two clicks</TextTitle>
+          <TextTitle>
+            You<br></br>
+            can meet<br></br>
+            Elon Musk
+          </TextTitle>
           <Text>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-            delectus autem, ipsum molestias vel asperiores incidunt quae nisi,
-            doloremque magnam tempore optio assumenda repellat eaque aspernatur
-            laudantium. Voluptates, non nemo!
+            delectus autem, ipsum molestias vel asperiores incidunt quae nisi.
           </Text>
           <Link to="/riches">
             <Button>Click here!</Button>
