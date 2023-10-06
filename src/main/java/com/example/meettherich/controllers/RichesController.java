@@ -17,14 +17,12 @@ public class RichesController {
     @Autowired
     private RichService service;
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public ResponseEntity<List<Rich>> findAllByOrderById() {
         List<Rich> list = service.findAllByOrderById();
         return ResponseEntity.ok().body(list);
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Rich> findById(@PathVariable Long id) {
         Rich obj = service.findById(id);

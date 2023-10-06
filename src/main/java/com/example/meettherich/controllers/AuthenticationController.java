@@ -1,8 +1,5 @@
 package com.example.meettherich.controllers;
-import com.example.meettherich.model.AuthenticationDTO;
-import com.example.meettherich.model.LoginResponseDTO;
-import com.example.meettherich.model.RegisterDTO;
-import com.example.meettherich.model.User;
+import com.example.meettherich.model.*;
 import com.example.meettherich.repository.UserRepository;
 import com.example.meettherich.security.SecurityConfigurations;
 import com.example.meettherich.security.TokenService;
@@ -59,7 +56,7 @@ public class AuthenticationController {
 
         String encryptedPassword = passwordEncoder.encode(data.password());
 
-        User newUser = new User(data.login(), data.email(), encryptedPassword, data.role());
+        User newUser = new User(data.login(), data.email(), encryptedPassword, UserRole.USER);
 
         this.userRepository.save(newUser);
         return ResponseEntity.ok().build();

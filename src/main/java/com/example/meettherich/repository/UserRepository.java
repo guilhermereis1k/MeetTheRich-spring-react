@@ -13,6 +13,5 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     public List<User> findAllByOrderById();
-
-    UserDetails findByLogin(String username);
+    UserDetails findByLogin(String login);
 }

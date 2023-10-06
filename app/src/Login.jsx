@@ -1,7 +1,7 @@
-import { styled } from "styled-components"
-import Header from "./components/Header"
-import { useRef, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { styled } from "styled-components";
+import Header from "./components/Header";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const FormContainer = styled.div`
   margin: 10rem auto;
@@ -19,7 +19,7 @@ const FormContainer = styled.div`
     text-align: center;
     margin-top: 1rem;
   }
-`
+`;
 
 const InputBox = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const InputBox = styled.div`
     background-color: #ececec;
     padding-left: 1.4rem;
   }
-`
+`;
 
 const Button = styled.button`
   display: block;
@@ -61,21 +61,22 @@ const Button = styled.button`
     color: #01003b;
     border: 2px solid #01003b;
   }
-`
+`;
 
 function Login() {
+  const [jwtToken, setJwtToken] = useState("");
+
   const [user, setUser] = useState({
     login: "",
     password: "",
-  })
+  });
 
   const onSubmitHandler = (e) => {
-    console.log(JSON.stringify(user))
-    e.preventDefault()
+    e.preventDefault();
 
     async function postJSON(data) {
       try {
-        const response = await fetch(`http://localhost:8080/users/validation`, {
+        const response = await fetch(`http://localhost:8080/auth/login`, {
           method: "POST", // or 'PUT'
           RequestCredentials: "includes",
           headers: {
@@ -83,24 +84,30 @@ function Login() {
             "Cache-Control": "no-cache",
           },
           body: JSON.stringify(user),
-        })
-        const result = await response.json()
-        return result
-        console.log(result)
+        });
+        const result = await response.json();
+        if (response.status == 200) {
+          localStorage.setItem("token", JSON.stringify(result));
+          console.log(localStorage.getItem("token"));
+          window.location.href = "/order";
+        } else {
+          alert(response.message);
+        }
+        return result;
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
       }
     }
 
-    postJSON()
-  }
+    postJSON();
+  };
 
   const handleInput = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -141,7 +148,7 @@ function Login() {
         </FormContainer>
       </form>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;

@@ -63,8 +63,9 @@ const Button = styled.button`
   }
 `;
 
-function Register() {
+function Register(props) {
   const navigate = useNavigate();
+  let { state } = useLocation();
 
   const [user, setUser] = useState({
     email: "",
@@ -78,7 +79,7 @@ function Register() {
     console.log(JSON.stringify(user));
     async function postJSON(data) {
       try {
-        const response = await fetch(`http://localhost:8080/users/create`, {
+        const response = await fetch(`http://localhost:8080/auth/register/`, {
           method: "POST", // or 'PUT'
           RequestCredentials: "includes",
           headers: {
@@ -96,8 +97,6 @@ function Register() {
     }
 
     postJSON();
-
-    navigate("/users/login");
   };
 
   const handleInput = (event) => {
@@ -116,24 +115,24 @@ function Register() {
           <p>Please fill in this form to make your meeting order.</p>
 
           <InputBox>
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              placeholder="Enter Email"
-              name="email"
-              id="email"
-              onChange={handleInput}
-              required
-            />
-          </InputBox>
-
-          <InputBox>
             <label htmlFor="login">Login</label>
             <input
               type="login"
               placeholder="Enter your login"
               name="login"
               id="login"
+              onChange={handleInput}
+              required
+            />
+          </InputBox>
+
+          <InputBox>
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              placeholder="Enter Email"
+              name="email"
+              id="email"
               onChange={handleInput}
               required
             />
