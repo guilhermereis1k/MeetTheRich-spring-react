@@ -56,6 +56,7 @@ const Button = styled.button`
   font-family: "Roboto";
   font-size: 1.4rem;
   cursor: pointer;
+  font-weight: 600;
 
   &:hover {
     background: #010029;
