@@ -1,5 +1,5 @@
 import RichItem from "./RichItem";
-import Header from "./components/Header"; //http://localhost:8080/riches
+import Header from "./UI/Header"; //http://localhost:8080/riches
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 

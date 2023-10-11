@@ -4,7 +4,8 @@ import App from "./App.jsx";
 import Riches from "./Riches.jsx";
 import Login from "./Login.jsx";
 import RichPage from "./RichPage.jsx";
-import Order from "./Order.jsx";
+import OrderPage from "./OrderPage.jsx";
+import Orders from "./Orders.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./Register.jsx";
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/order/",
-    element: <Order />,
+    element: <OrderPage />,
+  },
+  {
+    path: "/order/all",
+    element: <Orders />,
   },
 ]);
 

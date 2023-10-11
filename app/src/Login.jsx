@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
-import Header from "./components/Header";
-import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import Header from "./UI/Header";
+import { useState } from "react";
 
 const FormContainer = styled.div`
   margin: 10rem auto;
@@ -88,14 +87,23 @@ function Login() {
         const result = await response.json();
         if (response.status == 200) {
           localStorage.setItem("token", JSON.stringify(result));
-          console.log(localStorage.getItem("token"));
-          window.location.href = "/order";
+          if (localStorage.getItem("selectedRich")) {
+            window.location.href = "/order";
+          } else {
+            window.location.href = "/riches";
+          }
         } else {
           alert(response.message);
         }
         return result;
       } catch (error) {
         throw new Error(error);
+      } finally {
+        if (localStorage.getItem("token")) {
+          setInterval(() => {
+            localStorage.removeItem("token");
+          }, 7200000);
+        }
       }
     }
 

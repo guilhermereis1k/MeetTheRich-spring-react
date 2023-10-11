@@ -43,4 +43,10 @@ public class OrderService {
         return repository.save(order);
     }
 
+    public List<Order> findAllOrderByUser(User user) {
+        List<Order> allOrders = new ArrayList<>();
+        repository.findAllOrderByUser(user).forEach(allOrders::add);
+        return allOrders;
+    }
+
 }

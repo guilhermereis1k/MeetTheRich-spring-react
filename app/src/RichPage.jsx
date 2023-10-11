@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { styled } from "styled-components";
-import Header from "./components/Header";
+import Header from "./UI/Header";
 
 function RichPage() {
   const { id } = useParams();
@@ -121,6 +121,11 @@ function RichPage() {
 
   const saveRichIdHandler = () => {
     localStorage.setItem("selectedRich", richData.id);
+    if (localStorage.getItem("token")) {
+      window.location.href = "/order";
+    } else {
+      window.location.href = "/users/register";
+    }
   };
 
   return (
@@ -139,11 +144,9 @@ function RichPage() {
           <AboutText>{richData.aboutText}</AboutText>
           <FortuneTitle>Fortune:</FortuneTitle>
           <Fortune>{USDollar.format(richData.fortune)}</Fortune>
-          <Link to="/users/register">
-            <MeetButton onClick={saveRichIdHandler}>
-              Click here to meet him
-            </MeetButton>
-          </Link>
+          <MeetButton onClick={saveRichIdHandler}>
+            Click here to meet him
+          </MeetButton>
         </div>
       </RichContainer>
     </>

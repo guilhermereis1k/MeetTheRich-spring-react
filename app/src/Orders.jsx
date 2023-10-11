@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import RichItem from "./RichItem";
-import Header from "./components/Header"; //http://localhost:8080/riches
+import Header from "./UI/Header"; //http://localhost:8080/riches
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
@@ -44,6 +44,7 @@ const Button = styled.button`
   display: block;
   width: 100%;
   padding: 0 2rem;
+  margin-top: 2rem;
   height: 4rem;
   text-transform: uppercase;
   background: #01003b;
@@ -59,62 +60,63 @@ const Button = styled.button`
   }
 `;
 
-function Order(props) {
+function Orders(props) {
   const JWTToken = localStorage.getItem("token").split('"').splice(3, 1);
-  const [order, setOrder] = useState();
+  const [allOrders, setAllOrders] = useState([]);
 
-  // useEffect(() => {
-  //   async function getJSON(data) {
-  //     try {
-  //       const response = await fetch(
-  //         `http://localhost:8080/order/${localStorage.getItem("selectedRich")}`,
-  //         {
-  //           method: "post", // or 'PUT'
-  //           RequestCredentials: true,
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             "Cache-Control": "no-cache",
-  //             "Authorization": `Bearer ${JWTToken}`,
-  //           },
-  //         }
-  //       );
-  //       const result = await response.json();
-  //       setOrder(result);
-  //       return result;
-  //     } catch (error) {
-  //       console.error("Error:", error);
-  //     }
-  //   }
-  //   getJSON();
-  // }, []);
+  useEffect(() => {
+    async function getJSON(data) {
+      try {
+        const response = await fetch(`http://localhost:8080/order/all/`, {
+          method: "post",
+          RequestCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+            "Authorization": `Bearer ${JWTToken}`,
+          },
+        });
+        const result = await response.json();
+        setAllOrders(result);
+        console.log(result);
+        return result;
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+    if (localStorage.getItem("token") != null) {
+      console.log("running");
+      getJSON();
+    }
+  }, []);
 
-  console.log(order);
   return (
     <>
       <Header />
       <OrderContainer>
-        {order && (
+        {allOrders.map((item) => (
           <>
-            <OrderBox>
-              <OrderTitle>Order created!</OrderTitle>
-            </OrderBox>
-
+            <h1>Order:</h1>
             <OrderBox>
               <h1>Rich name:</h1>
-              <OrderData>{order.rich.name}</OrderData>
+              <OrderData>{item.rich.name}</OrderData>
             </OrderBox>
 
             <OrderBox>
               <h1>Order made by:</h1>
-              <OrderData>{order.user.login}</OrderData>
+              <OrderData>{item.user.login}</OrderData>
             </OrderBox>
 
             <OrderBox>
               <h1>Date of creation:</h1>
-              <OrderData>{order.instant}</OrderData>
+              <OrderData>{item.instant}</OrderData>
             </OrderBox>
           </>
-        )}
+        ))}
+        {localStorage.getItem("selectedRich") === null ||
+          (localStorage.getItem("selectedRich") === undefined && (
+            <h1>No rich selected</h1>
+          ))}
         <Link to="/">
           <Button>Return to home</Button>
         </Link>
@@ -123,4 +125,4 @@ function Order(props) {
   );
 }
 
-export default Order;
+export default Orders;

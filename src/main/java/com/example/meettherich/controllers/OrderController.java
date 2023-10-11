@@ -24,12 +24,8 @@ public class OrderController {
     @Autowired
     private RichService richService;
 
-    @GetMapping
-    public List<Order> findAll() {
-        return service.findAll();
-    }
 
-    @PostMapping("/{richId}")
+    @PostMapping("/create/{richId}")
     public ResponseEntity<Order> saveOrder(@PathVariable Long richId) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         LocalDate localDate = LocalDate.now();
@@ -38,5 +34,12 @@ public class OrderController {
         Order order = new Order(user, rich, localDate);
         service.saveOrder(order);
         return ResponseEntity.ok().body(order);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Order>> findAllOrderByUser() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Order> orders = service.findAllOrderByUser(user);
+        return ResponseEntity.ok().body(orders);
     }
 }

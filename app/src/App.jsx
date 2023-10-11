@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Header from "./components/Header";
+import Header from "./UI/Header";
 import elonMuskMainImage from "./assets/Elon-Musk-PNG-Free-Image.png";
 import { Link } from "react-router-dom";
 import Riches from "./Riches";

@@ -1,5 +1,6 @@
 package com.example.meettherich.repository;
 
+import com.example.meettherich.model.Order;
 import com.example.meettherich.model.Rich;
 import com.example.meettherich.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     public List<User> findAllByOrderById();
+
     UserDetails findByLogin(String login);
 }
