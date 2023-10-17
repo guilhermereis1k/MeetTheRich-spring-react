@@ -14,6 +14,7 @@ const HeaderTitle = styled.h1`
   font-family: "Oswald";
   font-size: 3rem;
   letter-spacing: 1rem;
+  color: #fff;
 `;
 
 const HeaderNav = styled.nav`
@@ -25,6 +26,7 @@ const HeaderNav = styled.nav`
 const HeaderNavList = styled.ul`
   display: inline-block;
   list-style: none;
+  color: #fff;
 `;
 
 const HeaderNavItem = styled.li`
@@ -38,12 +40,12 @@ const HeaderNavItem = styled.li`
   transition: all 0.2s;
 
   &:hover {
-    background-color: #01003b;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
   }
 `;
 
-function Header() {
+function WhiteHeader() {
   const JWTToken = localStorage.getItem("token");
 
   const logoutHandler = () => {
@@ -79,9 +81,7 @@ function Header() {
               <Link to="/order/all">
                 <HeaderNavItem>My orders</HeaderNavItem>
               </Link>
-              <Link to="/users/login">
-                <HeaderNavItem onClick={logoutHandler}>Logout</HeaderNavItem>
-              </Link>
+              <HeaderNavItem onClick={logoutHandler}>Logout</HeaderNavItem>
             </>
           )}
         </HeaderNavList>
@@ -90,4 +90,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default WhiteHeader;

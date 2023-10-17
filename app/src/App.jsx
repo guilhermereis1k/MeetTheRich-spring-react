@@ -1,8 +1,10 @@
 import { styled } from "styled-components";
 import Header from "./UI/Header";
-import elonMuskMainImage from "./assets/Elon-Musk-PNG-Free-Image.png";
+import elonMuskMainImage from "./assets/wp2048442-elon-musk-wallpapers.png";
 import { Link } from "react-router-dom";
 import Riches from "./Riches";
+import Container from "./UI/Container";
+import WhiteHeader from "./UI/WhiteHeader";
 
 const Content = styled.main`
   display: flex;
@@ -12,20 +14,12 @@ const Content = styled.main`
   height: calc(100vh - 6.5rem);
 `;
 
-const Image = styled.img`
-  display: block;
-  width: auto;
-  height: 90%;
-  align-self: end;
-  justify-self: right;
-`;
-
 const Text = styled.p`
   font-family: "Roboto";
   font-size: 1.8rem;
   font-weight: 300;
   line-height: auto;
-  width: 70%;
+  width: 50%;
   margin-bottom: 5rem;
 `;
 
@@ -36,22 +30,24 @@ const TextTitle = styled.h1`
   text-transform: uppercase;
   line-height: 12rem;
   margin-bottom: 2rem;
+  color: #fff;
 `;
 
 const TextContainer = styled.div`
   display: flex;
   justify-content: left;
   flex-direction: column;
+  color: #fff;
 `;
 
 const Button = styled.button`
   display: block;
-  width: 68%;
+  width: 50%;
   height: 6rem;
   text-transform: uppercase;
-  background: #01003b;
-  color: #ffffff;
-  transition: all 0.3s;
+  color: #01003b;
+  background-color: #ffffff;
+  transition: all 0.1s;
   border: 2px solid transparent;
   font-family: "Roboto";
   font-size: 1.4rem;
@@ -59,33 +55,41 @@ const Button = styled.button`
   font-weight: 600;
 
   &:hover {
-    background: #010029;
-    color: #ffffff;
+    transform: translateY(-0.5rem);
   }
+`;
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  background: url(${elonMuskMainImage});
 `;
 
 function App() {
   return (
-    <>
-      <Header />
-      <Content>
-        <TextContainer>
-          <TextTitle>
-            You<br></br>
-            can meet<br></br>
-            Elon Musk
-          </TextTitle>
-          <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-            delectus autem, ipsum molestias vel asperiores incidunt quae nisi.
-          </Text>
-          <Link to="/riches">
-            <Button>Click here!</Button>
-          </Link>
-        </TextContainer>
-        <Image src={elonMuskMainImage} alt="" />
-      </Content>
-    </>
+    <Background>
+      <Container>
+        <WhiteHeader />
+        <Content>
+          <TextContainer>
+            <TextTitle>
+              You<br></br>
+              can meet<br></br>
+              Elon Musk
+            </TextTitle>
+            <Text>
+              Make a bold choice and schedule a meeting with one of the most
+              influential tycoons. Simply select your favorite millionaire,
+              place your order, and await our contact. You're about to meet the
+              elite of the world's wealthiest.
+            </Text>
+            <Link to="/riches">
+              <Button>Click here!</Button>
+            </Link>
+          </TextContainer>
+        </Content>
+      </Container>
+    </Background>
   );
 }
 

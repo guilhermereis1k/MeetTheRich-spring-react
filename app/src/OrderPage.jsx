@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import RichItem from "./RichItem";
-import Header from "./UI/Header"; //http://localhost:8080/riches
+import Header from "./UI/Header";
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import Container from "./UI/Container";
 
 const OrderContainer = styled.div`
   margin: 3rem auto;
@@ -62,44 +62,61 @@ const Button = styled.button`
 
 function OrderPage(props) {
   const JWTToken = localStorage.getItem("token").split('"').splice(3, 1);
-  const [order, setOrder] = useState([]);
+  const [order, setOrder] = useState();
   const [loading, setLoading] = useState(true);
+  const [formattedMeetingDate, setFormattedMeetingDate] = useState();
+  const [formattedInstantDate, setFormattedInstantDate] = useState();
+
+  const selectedDate = localStorage.getItem("selectedDate");
 
   useEffect(() => {
-    async function getJSON(data) {
+    console.log("useeffect");
+    async function getJSON() {
+      console.log("getting json");
       try {
+        console.log("trying");
         const response = await fetch(
           `http://localhost:8080/order/create/${localStorage.getItem(
             "selectedRich"
           )}`,
           {
-            method: "get",
-            RequestCredentials: true,
+            method: "POST",
+            RequestCredentials: "includes",
             headers: {
               "Content-Type": "application/json",
               "Cache-Control": "no-cache",
               "Authorization": `Bearer ${JWTToken}`,
             },
+            body: JSON.stringify(selectedDate),
           }
         );
         const result = await response.json();
+
+        setFormattedMeetingDate(new Date(result.instant).toLocaleDateString());
+
+        setFormattedInstantDate(
+          new Date(result.meetingDate).toLocaleDateString()
+        );
+
         setOrder(result);
         localStorage.removeItem("selectedRich");
+        localStorage.removeItem("selectedDate");
         setLoading(false);
+
         return result;
       } catch (error) {
-        console.error("Error:", error);
+        console.error("zError:", error);
       }
     }
+
     getJSON();
   }, []);
 
-  console.log(localStorage.getItem("selectedRich"));
   return (
-    <>
+    <Container>
       <Header />
       <OrderContainer>
-        {order && (
+        {order ? (
           <>
             <OrderBox>
               <OrderTitle>Order created!</OrderTitle>
@@ -117,16 +134,22 @@ function OrderPage(props) {
 
             <OrderBox>
               <h1>Date of creation:</h1>
-              <OrderData>{order.instant}</OrderData>
+              <OrderData>{formattedInstantDate}</OrderData>
+            </OrderBox>
+
+            <OrderBox>
+              <h1>Date of the meeting:</h1>
+              <OrderData>{formattedMeetingDate}</OrderData>
             </OrderBox>
           </>
+        ) : (
+          <h1>No rich selected</h1>
         )}
-        {loading && <h1>No rich selected</h1>}
         <Link to="/">
           <Button>Return to home</Button>
         </Link>
       </OrderContainer>
-    </>
+    </Container>
   );
 }
 

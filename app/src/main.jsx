@@ -9,6 +9,7 @@ import Orders from "./Orders.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./Register.jsx";
+import About from "./About.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +33,16 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/order/",
+    path: "/order",
     element: <OrderPage />,
   },
   {
     path: "/order/all",
     element: <Orders />,
+  },
+  {
+    path: "/about",
+    element: <About />,
   },
 ]);
 

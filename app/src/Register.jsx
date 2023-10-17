@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import Header from "./UI/Header";
 import { useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Container from "./UI/Container";
 
 const FormContainer = styled.div`
   margin: 10rem auto;
@@ -52,7 +53,6 @@ const Button = styled.button`
   border: 2px solid transparent;
   font-family: "Roboto";
   font-size: 1.4rem;
-  margin-top: 2rem;
   border-radius: 10px;
   cursor: pointer;
 
@@ -107,7 +107,7 @@ function Register(props) {
   };
 
   return (
-    <>
+    <Container>
       <Header />
       <form onSubmit={onSubmitHandler}>
         <FormContainer>
@@ -117,7 +117,7 @@ function Register(props) {
           <InputBox>
             <label htmlFor="login">Login</label>
             <input
-              type="login"
+              type="text"
               placeholder="Enter your login"
               name="login"
               id="login"
@@ -129,7 +129,7 @@ function Register(props) {
           <InputBox>
             <label htmlFor="email">Email</label>
             <input
-              type="text"
+              type="email"
               placeholder="Enter Email"
               name="email"
               id="email"
@@ -141,7 +141,7 @@ function Register(props) {
           <InputBox>
             <label htmlFor="password">Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Enter your password"
               name="password"
               password="password"
@@ -150,18 +150,16 @@ function Register(props) {
               required
             />
           </InputBox>
-          <InputBox>
-            <Link to="/users/login">
-              <p>I have an account</p>
-            </Link>
-          </InputBox>
+          <Link to="/users/login">
+            <p>I have an account</p>
+          </Link>
 
           <InputBox>
             <Button type="submit">Register</Button>
           </InputBox>
         </FormContainer>
       </form>
-    </>
+    </Container>
   );
 }
 

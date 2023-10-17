@@ -1,5 +1,6 @@
 package com.example.meettherich.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,12 +32,17 @@ public class Order implements Serializable {
     @JoinColumn(name = "richId")
     private Rich rich;
 
-    private LocalDate instant;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private ZonedDateTime instant;
 
-    public Order(User user, Rich rich, LocalDate instant) {
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private ZonedDateTime meetingDate;
+
+    public Order(User user, Rich rich, ZonedDateTime instant, ZonedDateTime meetingDate) {
         this.user = user;
         this.rich = rich;
         this.instant = instant;
+        this.meetingDate = meetingDate;
     }
 
     public Integer getId() {

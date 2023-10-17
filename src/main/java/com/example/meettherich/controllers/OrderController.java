@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +28,12 @@ public class OrderController {
 
 
     @PostMapping("/create/{richId}")
-    public ResponseEntity<Order> saveOrder(@PathVariable Long richId) {
+    public ResponseEntity<Order> saveOrder(@PathVariable Long richId, @RequestBody ZonedDateTime meetingDate) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        LocalDate localDate = LocalDate.now();
+        ZonedDateTime localDate = ZonedDateTime.now();
         Rich rich = richService.findById(richId);
 
-        Order order = new Order(user, rich, localDate);
+        Order order = new Order(user, rich, localDate, meetingDate);
         service.saveOrder(order);
         return ResponseEntity.ok().body(order);
     }
@@ -41,5 +43,11 @@ public class OrderController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Order> orders = service.findAllOrderByUser(user);
         return ResponseEntity.ok().body(orders);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> delete(@RequestBody Long orderId) {
+        service.delete(orderId);
+        return ResponseEntity.ok().body("Order de id " + orderId + " removido.");
     }
 }

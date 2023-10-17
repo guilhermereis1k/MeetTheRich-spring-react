@@ -9,15 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MeettherichApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(MeettherichApplication.class, args);
 	}
-
-	@Bean
-	public PasswordEncoder PasswordEncoder() {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
-	}
-
 }

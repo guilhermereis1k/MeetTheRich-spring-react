@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Header from "./UI/Header";
 import { useState } from "react";
+import Container from "./UI/Container";
 
 const FormContainer = styled.div`
   margin: 10rem auto;
@@ -118,7 +119,7 @@ function Login() {
   };
 
   return (
-    <>
+    <Container>
       <Header />
       <form onSubmit={onSubmitHandler}>
         <FormContainer>
@@ -128,7 +129,7 @@ function Login() {
           <InputBox>
             <label htmlFor="login">Login</label>
             <input
-              type="login"
+              type="text"
               placeholder="Enter your login"
               name="login"
               id="login"
@@ -140,7 +141,7 @@ function Login() {
           <InputBox>
             <label htmlFor="password">Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Enter your password"
               name="password"
               password="password"
@@ -155,7 +156,7 @@ function Login() {
           </InputBox>
         </FormContainer>
       </form>
-    </>
+    </Container>
   );
 }
 

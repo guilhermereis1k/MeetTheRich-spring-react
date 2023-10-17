@@ -1,4 +1,5 @@
 import RichItem from "./RichItem";
+import Container from "./UI/Container";
 import Header from "./UI/Header"; //http://localhost:8080/riches
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
@@ -16,7 +17,7 @@ function Riches() {
   const [richesList, setRichesList] = useState([]);
 
   useEffect(() => {
-    async function getJSON(data) {
+    async function getJSON() {
       try {
         const response = await fetch("http://localhost:8080/riches", {
           method: "get", // or 'PUT'
@@ -25,7 +26,6 @@ function Riches() {
             "Content-Type": "application/json",
             "Cache-Control": "no-cache",
           },
-          body: JSON.stringify(data),
         });
         const result = await response.json();
         setRichesList(result);
@@ -39,7 +39,7 @@ function Riches() {
   }, []);
 
   return (
-    <>
+    <Container>
       <Header />
       <RichList>
         {richesList.map((item) => (
@@ -52,7 +52,7 @@ function Riches() {
           />
         ))}
       </RichList>
-    </>
+    </Container>
   );
 }
 
