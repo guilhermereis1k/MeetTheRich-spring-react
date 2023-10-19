@@ -24,6 +24,13 @@ const TextContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      margin-top: 10rem;
+      width: 80%;
+    }
+  }
 `;
 
 const Text = styled.p`
@@ -32,6 +39,13 @@ const Text = styled.p`
   font-weight: 400;
   line-height: 2.6rem;
   text-align: center;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      font-size: 2.8rem;
+      line-height: 4.6rem;
+    }
+  }
 `;
 
 const Content = styled.div`
@@ -41,8 +55,9 @@ const Content = styled.div`
 `;
 
 const BoxImages = styled.div`
-  margin-top: 9rem;
+  width: 100vw;
   display: flex;
+  margin-top: 12rem;
   flex-direction: row;
   align-self: flex-end;
   height: 40rem;
@@ -54,44 +69,60 @@ const Image = styled.img`
   object-fit: contain;
 `;
 
+const FlexBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+const FlexContainer = styled.div`
+  height: auto;
+`;
+
 function About() {
   return (
     <>
-      <Container>
-        <Header />
-        <Content>
-          <TextContainer>
-            <TextTitle>
-              <h1>About us</h1>
-            </TextTitle>
-            <Text>
-              At Meet The Rich, we are dedicated to making extraordinary
-              connections happen. Our mission is to bridge the gap between those
-              seeking unique encounters and the world's most influential
-              individuals. We believe in the power of connections, and we're
-              here to facilitate unforgettable meetings that can inspire,
-              empower, and transform lives.
-              <br></br>
-              With a team of experienced professionals, we ensure every
-              interaction is discreet, secure, and tailored to your desires. Our
-              commitment to excellence is unwavering, as we bring together
-              dreamers and visionaries, uniting you with the icons of success.
-              <br></br>
-              Join us in the pursuit of remarkable encounters, where the
-              extraordinary becomes reality. Welcome to Meet The Rich, where
-              aspirations meet affluence, and extraordinary moments are just a
-              click away.
-            </Text>
-          </TextContainer>
-        </Content>
-      </Container>
-      <BoxImages>
-        <Image src={JeffBezosWithFanImage} />
-        <Image src={ElonMuskWithFanImage} />
-        <Image src={MarkZukWithFanImage} />
-        <Image src={BillGatesWithFanImage} />
-        <Image src={LarryPageWithFanImage} />
-      </BoxImages>
+      <FlexContainer>
+        <FlexBox>
+          <Container>
+            <Header />
+            <Content>
+              <TextContainer>
+                <TextTitle>
+                  <h1>About us</h1>
+                </TextTitle>
+                <Text>
+                  At Meet The Rich, we are dedicated to making extraordinary
+                  connections happen. Our mission is to bridge the gap between
+                  those seeking unique encounters and the world's most
+                  influential individuals. We believe in the power of
+                  connections, and we're here to facilitate unforgettable
+                  meetings that can inspire, empower, and transform lives.
+                  <br></br>
+                  With a team of experienced professionals, we ensure every
+                  interaction is discreet, secure, and tailored to your desires.
+                  Our commitment to excellence is unwavering, as we bring
+                  together dreamers and visionaries, uniting you with the icons
+                  of success.
+                  <br></br>
+                  Join us in the pursuit of remarkable encounters, where the
+                  extraordinary becomes reality. Welcome to Meet The Rich, where
+                  aspirations meet affluence, and extraordinary moments are just
+                  a click away.
+                </Text>
+              </TextContainer>
+            </Content>
+          </Container>
+          <BoxImages>
+            <Image src={JeffBezosWithFanImage} />
+            <Image src={ElonMuskWithFanImage} />
+            <Image src={MarkZukWithFanImage} />
+            <Image src={BillGatesWithFanImage} />
+            <Image src={LarryPageWithFanImage} />
+          </BoxImages>
+        </FlexBox>
+      </FlexContainer>
     </>
   );
 }

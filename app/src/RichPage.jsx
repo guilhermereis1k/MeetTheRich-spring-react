@@ -11,7 +11,6 @@ const RichImage = styled.img`
   height: 45rem;
   width: 35rem;
   object-fit: cover;
-  margin-bottom: 2rem;
 `;
 
 const RichContainer = styled.div`
@@ -20,24 +19,47 @@ const RichContainer = styled.div`
   justify-content: center;
   align-items: start;
   margin: 10rem 5rem;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      flex-direction: column;
+      gap: 3rem;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 
 const RichInfo = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center
-border: 1px solid #000;
-margin-right: 8rem;
-font-family: "Roboto";
-line-height: 3rem;
-font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 3rem;
+  background-color: #01003b;
+  color: #fff;
+  margin-right: 8rem;
+  font-family: "Roboto";
+  line-height: 3rem;
+  font-size: 1.5rem;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      margin-right: 0;
+    }
+  }
 `;
 
 const AboutText = styled.p`
   font-family: "Roboto";
   font-size: 1.8rem;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      display: block;
+    }
+  }
 `;
 
 const Name = styled.h1`
@@ -46,23 +68,41 @@ const Name = styled.h1`
   font-size: 4rem;
   letter-spacing: 1rem;
   margin-bottom: 2rem;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+  }
 `;
 
 const Fortune = styled.h2`
   font-family: "Oswald";
   font-size: 4rem;
+  margin-bottom: 3rem;
 `;
 
 const FortuneTitle = styled.h3`
-  margin-top: 5rem;
+  margin-top: 3rem;
   font-family: "Oswald";
   font-size: 3rem;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      margin-top: 2rem;
+    }
+  }
 `;
 
 const RichInfoTitle = styled.h2`
+  margin-top: 0.5em;
   margin-bottom: 1rem;
   font-family: "Oswald";
   font-size: 3rem;
+  color: #fff;
+  width: 100%;
+  padding: 1rem 0;
 `;
 
 const RichInfos = styled.h3`
@@ -81,11 +121,41 @@ const MeetButton = styled.button`
   font-family: "Roboto";
   font-size: 2rem;
   transition: all 0.3s;
+  font-weight: 700;
 
   &:hover {
     background: #fff;
     color: #01003b;
     border: 2px solid #01003b;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    & {
+      width: 80%;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    & {
+      width: 100%;
+      font-size: 2.4rem;
+      height: 6rem;
+      font-weight: 700;
+    }
+  }
+`;
+
+const RichData = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CalendarFlex = styled.div`
+  @media only screen and (max-width: 900px) {
+    & {
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
 
@@ -149,22 +219,22 @@ function RichPage() {
           <RichInfos>Nationality: {richData.nationality}</RichInfos>
           <RichInfos>Birth Date: {richData.birthDate}</RichInfos>
         </RichInfo>
-        <div>
+        <RichData>
           <Name>{richData.name}</Name>
           <AboutText>{richData.aboutText}</AboutText>
           <FortuneTitle>Fortune:</FortuneTitle>
           <Fortune>{USDollar.format(richData.fortune)}</Fortune>
-          <div>
+          <CalendarFlex>
             <Calendar
               onChange={saveDateValueHandler}
               minDate={new Date()}
               value={dateValue}
             />
-          </div>
+          </CalendarFlex>
           <MeetButton onClick={saveRichDataHandler}>
             Click here to meet him
           </MeetButton>
-        </div>
+        </RichData>
       </RichContainer>
     </Container>
   );

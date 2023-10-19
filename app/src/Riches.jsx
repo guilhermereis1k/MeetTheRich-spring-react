@@ -10,7 +10,7 @@ const RichList = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 4rem;
 `;
 
 function Riches() {

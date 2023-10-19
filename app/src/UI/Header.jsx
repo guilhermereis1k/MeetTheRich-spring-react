@@ -20,6 +20,12 @@ const HeaderNav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      display: none;
+    }
+  }
 `;
 
 const HeaderNavList = styled.ul`
@@ -86,6 +92,60 @@ function Header() {
           )}
         </HeaderNavList>
       </HeaderNav>
+      <div className="navigation">
+        <input
+          type="checkbox"
+          className="navigation__checkbox"
+          id="navi-toggle"
+        />
+
+        <label for="navi-toggle" className="navigation__button blue">
+          <span className="navigation__icon-white">&nbsp;</span>
+        </label>
+
+        <div className="navigation__background">&nbsp;</div>
+
+        <nav className="navigation__nav">
+          <ul className="navigation__list">
+            <li className="navigation__item">
+              <Link className="navigation__link" to="/riches">
+                Riches
+              </Link>
+            </li>
+            {!JWTToken && (
+              <>
+                <li className="navigation__item">
+                  <Link className="navigation__link" to="/users/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="navigation__item">
+                  <Link className="navigation__link" to="/users/register">
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+            <li className="navigation__item">
+              <Link className="navigation__link" to="/about">
+                About
+              </Link>
+            </li>
+            {JWTToken && (
+              <>
+                <li className="navigation__item">
+                  <Link className="navigation__link" to="/order/all">
+                    Orders
+                  </Link>
+                  <li className="navigation__item" onClick={logoutHandler}>
+                    Logout
+                  </li>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+      </div>
     </HeaderContainer>
   );
 }

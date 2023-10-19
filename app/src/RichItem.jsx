@@ -9,13 +9,21 @@ const RichImage = styled.img`
 `;
 
 const RichContainer = styled.div`
-  width: 30rem;
-  height: 50rem;
+  width: auto;
+  height: auto;
+  padding-bottom: 2rem;
   font-family: "Roboto";
   font-size: 1.4rem;
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: #01003b;
+  color: #fff;
+  transition: all 0.1s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const RichTitle = styled.h1`

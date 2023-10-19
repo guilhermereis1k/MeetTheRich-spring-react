@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Header from "./UI/Header";
 import elonMuskMainImage from "./assets/wp2048442-elon-musk-wallpapers.png";
+import elonMuskMainImageMobile from "./assets/mtr-mobile.png";
 import { Link } from "react-router-dom";
 import Riches from "./Riches";
 import Container from "./UI/Container";
@@ -21,6 +22,15 @@ const Text = styled.p`
   line-height: auto;
   width: 50%;
   margin-bottom: 5rem;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      width: 90%;
+      font-size: 2.4rem;
+      text-align: center;
+      font-weight: 500;
+    }
+  }
 `;
 
 const TextTitle = styled.h1`
@@ -31,6 +41,16 @@ const TextTitle = styled.h1`
   line-height: 12rem;
   margin-bottom: 2rem;
   color: #fff;
+
+  @media only screen and (max-width: 900px) {
+    & {
+      font-size: 8rem;
+      word-break: normal;
+      white-space: nowrap;
+      text-align: center;
+      line-height: 9rem;
+    }
+  }
 `;
 
 const TextContainer = styled.div`
@@ -57,12 +77,40 @@ const Button = styled.button`
   &:hover {
     transform: translateY(-0.5rem);
   }
+
+  @media only screen and (max-width: 900px) {
+    & {
+      width: 100%;
+      font-size: 2.4rem;
+    }
+  }
 `;
 
 const Background = styled.div`
   width: 100%;
   height: 100%;
-  background: url(${elonMuskMainImage});
+  background: url(${elonMuskMainImage}) no-repeat;
+  background-size: cover;
+  background-position: left;
+
+  @media only screen and (max-width: 1500px) {
+    & {
+      background-position: left;
+    }
+  }
+
+  @media only screen and (max-width: 1200px) {
+    & {
+      background-position: left bottom;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    & {
+      background: url(${elonMuskMainImageMobile}) no-repeat;
+      background-position: center;
+    }
+  }
 `;
 
 function App() {

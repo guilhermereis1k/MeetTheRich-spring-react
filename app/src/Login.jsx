@@ -19,6 +19,12 @@ const FormContainer = styled.div`
     text-align: center;
     margin-top: 1rem;
   }
+
+  @media only screen and (max-width: 900px) {
+    & {
+      width: 100%;
+    }
+  }
 `;
 
 const InputBox = styled.div`
